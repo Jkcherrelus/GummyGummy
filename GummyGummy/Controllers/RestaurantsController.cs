@@ -28,11 +28,8 @@ namespace GummyGummy.Controllers
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : " ";
             ViewBag.RateSortParm = sortOrder == "Rate" ? "rate_desc" : "rate";
-            var restaurant = from s in db.Restaurants select s;
-            var reviews = from sa in db.Reviews select sa;
-
+            var restaurant = db.Restaurants.Include(m => m.Review);
             
-
             if(!String.IsNullOrEmpty(searchString))
             {
                 restaurant = restaurant.Where(m => m.Name.Contains(searchString) || 
@@ -46,14 +43,10 @@ namespace GummyGummy.Controllers
                     restaurant = restaurant.OrderByDescending(m => m.Name);
                     break;
                 case "rate_desc":
-                    reviews = from s in db.Reviews
-                                 join sa in db.Restaurants
-                                 on s.RestaurantId equals sa.Id
-                                 select s;
-                    reviews = reviews.OrderByDescending(m => m.Rating); 
-
+                    restaurant = restaurant.OrderByDescending(m => m.AvgRating);
                     break;
                 case "rate":
+                    restaurant = restaurant.OrderBy(m => m.AvgRating);
                     break;
                 default:
                     break;

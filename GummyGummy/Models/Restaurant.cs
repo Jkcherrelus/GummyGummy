@@ -24,6 +24,10 @@ namespace GummyGummy.Models
         { get
             {
                 decimal total = 0;
+                if (Review == null)
+                {
+                    return total;
+                }
                 foreach (var item in Review)
                 {
                     total += item.Rating;
