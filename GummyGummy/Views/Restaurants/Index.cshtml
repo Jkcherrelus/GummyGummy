@@ -1,0 +1,74 @@
+﻿@model IEnumerable<GummyGummy.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Restaurants";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var re = Model.Select(m => m.Review);
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find Restaurant: @Html.TextBox("SearchString");
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Rate","Index",new { sortOrder = ViewBag.RateSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvgRating)
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address.Street)
+            <br />
+            @Html.DisplayFor(modelItem => item.Address.City),
+            @Html.DisplayFor(modelItem => item.Address.State),
+            @Html.DisplayFor(modelItem => item.Address.ZipCode)
+            <br />
+            @Html.DisplayFor(modelItem => item.Address.Country)
+            
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Reviews", "Index","RestaurantReviews", new { id=item.Id },null) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

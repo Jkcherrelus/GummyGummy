@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GummyGummy;
 using GummyGummy.Controllers;
+using System.Web.Routing;
 
 namespace GummyGummy.Tests.Controllers
 {
@@ -26,6 +27,7 @@ namespace GummyGummy.Tests.Controllers
         }
 
         [TestMethod]
+        //[ExpectedException(typeof(DivideByZeroException),"The engine is off")]
         public void About()
         {
             // Arrange
@@ -49,6 +51,22 @@ namespace GummyGummy.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void fileNotFound()
+        {
+            HomeController controller = new HomeController();
+
+            ViewResult result = controller.Contact() as ViewResult;
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void Test_Routes()
+        {
+           
         }
     }
 }
