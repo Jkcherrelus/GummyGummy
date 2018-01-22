@@ -11,6 +11,7 @@ namespace GummyGummy.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
         public decimal Rating { get; set; }
         [DataType(DataType.MultilineText)]
         public string Comment { get; set; }

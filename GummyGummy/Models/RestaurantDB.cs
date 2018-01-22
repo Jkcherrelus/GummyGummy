@@ -13,7 +13,7 @@ namespace GummyGummy.Models
         // If you wish to target a different database and/or database provider, modify the 'RestaurantDB' 
         // connection string in the application configuration file.
         public RestaurantDB()
-            : base("name=RestaurantDB")
+            : base("name=RevatureProject1")
         {
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////

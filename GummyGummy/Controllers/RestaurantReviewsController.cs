@@ -18,8 +18,8 @@ namespace GummyGummy.Controllers
         // GET: RestaurantReviews
         public ActionResult Index(int? id)
         {
-           
             var reviews = db.Reviews.Include(r => r.Restaurant).Where(m => id == m.Restaurant.Id);
+            
             return View(reviews.ToList());
         }
         
@@ -32,16 +32,24 @@ namespace GummyGummy.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RestaurantReview restaurantReview = db.Reviews.Find(id);
+            ViewBag.RestaurantName = db.Restaurants.SingleOrDefault(r => r.Id == restaurantReview.RestaurantId).Name;
             if (restaurantReview == null)
             {
                 return HttpNotFound();
             }
+
+
             return View(restaurantReview);
         }
 
         // GET: RestaurantReviews/Create
         public ActionResult Create()
         {
+            var userId = User.Identity.GetUserId();//gets the user id
+            if(userId == null)
+            {
+                return RedirectToAction("Index");
+            }
             ViewBag.RestaurantId = new SelectList(db.Restaurants, "Id", "Name");
             return View();
         }
@@ -50,10 +58,16 @@ namespace GummyGummy.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles ="User")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Rating,Comment,DateRated,RestaurantId")] RestaurantReview restaurantReview)
         {
+            
+
+            var userId = User.Identity.GetUserId();//gets the user id
+            if (userId == null)
+            {
+                return RedirectToAction("Index","RestaurantReviewsController");
+            }
             if (ModelState.IsValid)
             {
                 restaurantReview.UserID = User.Identity.GetUserId();
@@ -68,20 +82,21 @@ namespace GummyGummy.Controllers
         }
 
         // GET: RestaurantReviews/Edit/5
-        [Authorize(Roles = "User,Admin")]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            
+            var userId = User.Identity.GetUserId();//gets the user id
             RestaurantReview restaurantReview = db.Reviews.Find(id);
-            if (restaurantReview == null)
+            if(!string.Equals(userId,restaurantReview.UserID))//checks if the user is correct
+            {
+                //sends you to the login page
+                return RedirectToAction("Login", "Account");
+            }
+            if (restaurantReview == null )
             {
                 return HttpNotFound();
             }
 
-            var userId = User.Identity.GetUserId();
 
             ViewBag.RestaurantId = new SelectList(db.Restaurants, "Id", "Name", restaurantReview.RestaurantId);
             return View(restaurantReview);
@@ -92,18 +107,14 @@ namespace GummyGummy.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "User,Admin")]
         public ActionResult Edit([Bind(Include = "Id,Rating,Comment,DateRated,RestaurantId")] RestaurantReview restaurantReview)
         {
-            if(!User.Identity.IsAuthenticated)
-            {
-                return View(restaurantReview);
-            }
 
-            var userId = User.Identity.GetUserId();
-
-            if (ModelState.IsValid && userId == restaurantReview.UserID)
+            if (ModelState.IsValid )//checks that the user matches the id
             {
+                //is used to get the current user id
+                var userId = User.Identity.GetUserId();
+                restaurantReview.UserID = userId;
                 db.Entry(restaurantReview).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

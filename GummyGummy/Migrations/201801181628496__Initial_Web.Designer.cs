@@ -7,13 +7,13 @@ namespace GummyGummy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _IDK : IMigrationMetadata
+    public sealed partial class _Initial_Web : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_IDK));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_Initial_Web));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801172043130__IDK"; }
+            get { return "201801181628496__Initial_Web"; }
         }
         
         string IMigrationMetadata.Source

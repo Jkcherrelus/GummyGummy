@@ -7,13 +7,13 @@ namespace GummyGummy.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _addRestaurantAddress : IMigrationMetadata
+    public sealed partial class _Authentication_Restaurant : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_addRestaurantAddress));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_Authentication_Restaurant));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801112120196__addRestaurantAddress"; }
+            get { return "201801191537406__Authentication_Restaurant"; }
         }
         
         string IMigrationMetadata.Source

@@ -14,10 +14,13 @@ namespace GummyGummy.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [DisplayName("Restuarant Name")]
+        [Required]
         public string Name { get; set; }
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Phone number is not valid")]
+        [Required]
         public string Phone { get; set; }
         [DataType(DataType.EmailAddress, ErrorMessage = "Email address is not valid")]
+        [Required]
         public string Email { get; set; }
         [NotMapped]
         public decimal AvgRating
@@ -32,7 +35,11 @@ namespace GummyGummy.Models
                 {
                     total += item.Rating;
                 }
-                return total/=Review.Count;
+                if(Review.Count > 0)
+                {
+                    return total /= Review.Count;
+                }
+                return total;
             }
         }
         public ICollection<RestaurantReview> Review { get; set; }

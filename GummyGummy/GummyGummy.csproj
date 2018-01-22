@@ -206,29 +206,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801111659524__addNewItem.cs" />
-    <Compile Include="Migrations\201801111659524__addNewItem.Designer.cs">
-      <DependentUpon>201801111659524__addNewItem.cs</DependentUpon>
+    <Compile Include="Migrations\201801181628496__Initial_Web.cs" />
+    <Compile Include="Migrations\201801181628496__Initial_Web.Designer.cs">
+      <DependentUpon>201801181628496__Initial_Web.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801112120196__addRestaurantAddress.cs" />
-    <Compile Include="Migrations\201801112120196__addRestaurantAddress.Designer.cs">
-      <DependentUpon>201801112120196__addRestaurantAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801121603034__addEmailandPhoneRestaurant.cs" />
-    <Compile Include="Migrations\201801121603034__addEmailandPhoneRestaurant.Designer.cs">
-      <DependentUpon>201801121603034__addEmailandPhoneRestaurant.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801121635388__addEmailandPhoneRestaurant2.cs" />
-    <Compile Include="Migrations\201801121635388__addEmailandPhoneRestaurant2.Designer.cs">
-      <DependentUpon>201801121635388__addEmailandPhoneRestaurant2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801150113231__deleteAvgRating.cs" />
-    <Compile Include="Migrations\201801150113231__deleteAvgRating.Designer.cs">
-      <DependentUpon>201801150113231__deleteAvgRating.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801172043130__IDK.cs" />
-    <Compile Include="Migrations\201801172043130__IDK.Designer.cs">
-      <DependentUpon>201801172043130__IDK.cs</DependentUpon>
+    <Compile Include="Migrations\201801191537406__Authentication_Restaurant.cs" />
+    <Compile Include="Migrations\201801191537406__Authentication_Restaurant.Designer.cs">
+      <DependentUpon>201801191537406__Authentication_Restaurant.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -250,11 +234,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\mainPageImage.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\RevatureProject1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\RevatureProject1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -311,6 +298,7 @@
     <Content Include="Views\RestaurantReviews\Details.cshtml" />
     <Content Include="Views\RestaurantReviews\Edit.cshtml" />
     <Content Include="Views\RestaurantReviews\Index.cshtml" />
+    <Content Include="Views\Shared\TopRestaurants.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,23 +312,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801111659524__addNewItem.resx">
-      <DependentUpon>201801111659524__addNewItem.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801181628496__Initial_Web.resx">
+      <DependentUpon>201801181628496__Initial_Web.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801112120196__addRestaurantAddress.resx">
-      <DependentUpon>201801112120196__addRestaurantAddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801121603034__addEmailandPhoneRestaurant.resx">
-      <DependentUpon>201801121603034__addEmailandPhoneRestaurant.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801121635388__addEmailandPhoneRestaurant2.resx">
-      <DependentUpon>201801121635388__addEmailandPhoneRestaurant2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801150113231__deleteAvgRating.resx">
-      <DependentUpon>201801150113231__deleteAvgRating.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801172043130__IDK.resx">
-      <DependentUpon>201801172043130__IDK.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801191537406__Authentication_Restaurant.resx">
+      <DependentUpon>201801191537406__Authentication_Restaurant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

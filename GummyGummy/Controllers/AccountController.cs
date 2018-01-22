@@ -165,8 +165,9 @@ namespace GummyGummy.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    Roles.AddUserToRole(User.Identity.GetUserId(), "User");//sets a the role a new user is given at registration
+                   // Roles.AddUserToRole(user.Id, "User");//sets a the role a new user is given at registration
                     return RedirectToAction("Index", "Home");
+                    
                 }
                 AddErrors(result);
             }

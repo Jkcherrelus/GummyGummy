@@ -6,10 +6,13 @@
     var re = Model.Select(m => m.Review);
 }
 
-<h2>Index</h2>
+<h2>Restaurants</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New Restaurant", "Create")
+    }
 </p>
 @using (Html.BeginForm())
 {
@@ -64,9 +67,14 @@
             
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Reviews", "Index","RestaurantReviews", new { id=item.Id },null) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+          
+            @if(User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit | ", "Edit", new { id = item.Id });
+                @Html.ActionLink("Delete | ", "Delete", new { id = item.Id });
+            }
+            @Html.ActionLink("Reviews", "Index", "RestaurantReviews", new { id = item.Id }, null) 
+
         </td>
     </tr>
 }

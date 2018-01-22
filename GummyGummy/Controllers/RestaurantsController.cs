@@ -26,10 +26,13 @@ namespace GummyGummy.Controllers
 
         public ActionResult Index(string sortOrder, string searchString)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : " ";
-            ViewBag.RateSortParm = sortOrder == "Rate" ? "rate_desc" : "rate";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.RateSortParm = sortOrder == "Rate" ? "rate_desc" : "Rate";
             var restaurant = db.Restaurants.Include(m => m.Review);
-            
+            if(sortOrder == null && searchString == null)
+            {
+                sortOrder = "";
+            }
             if(!String.IsNullOrEmpty(searchString))
             {
                 restaurant = restaurant.Where(m => m.Name.Contains(searchString) || 
@@ -37,22 +40,23 @@ namespace GummyGummy.Controllers
                                 m.Address.ZipCode.Contains(searchString) ||
                                 m.Address.State.Contains(searchString));
             }
+            IEnumerable<Restaurant> restaurantList = null;
             switch (sortOrder)
             {
                 case "name_desc":
-                    restaurant = restaurant.OrderByDescending(m => m.Name);
+                    restaurantList = restaurant.ToList().OrderByDescending(m => m.Name);
                     break;
                 case "rate_desc":
-                    restaurant = restaurant.OrderByDescending(m => m.AvgRating);
+                    restaurantList = restaurant.ToList().OrderByDescending(m => m.AvgRating);
                     break;
-                case "rate":
-                    restaurant = restaurant.OrderBy(m => m.AvgRating);
+                case "Rate":
+                    restaurantList = restaurant.ToList().OrderBy(m => m.AvgRating);
                     break;
                 default:
+                    restaurantList = restaurant.ToList().OrderBy(m => m.Name);
                     break;
             }
-
-            return View(restaurant.ToList());
+            return View(restaurantList.ToList());
         }
 
 
